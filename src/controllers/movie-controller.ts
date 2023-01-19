@@ -4,7 +4,7 @@ import httpStatus from "http-status";
 
 export async function getTopTrendingList(req: Request, res: Response) {
   try {
-    const data = await TMDB.getTopTrending();
+    const data = await TMDB.getTrendingNow();
     res.status(httpStatus.OK).send(data);
   } catch (error) {
     console.log(error.message);
