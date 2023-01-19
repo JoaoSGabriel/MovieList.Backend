@@ -6,7 +6,7 @@ export type RequestError = {
   message: string;
 };
 
-export type TrendingNow = {
+export type MovieTrendingList = {
   page: number;
   total_results: number;
   total_pages: number;
