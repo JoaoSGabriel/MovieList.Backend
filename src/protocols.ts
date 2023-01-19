@@ -26,4 +26,5 @@ export type MovieTrendingList = {
     video: boolean,
     vote_average: number
   ];
+  dates: [maximum: string, minimum: string];
 };
