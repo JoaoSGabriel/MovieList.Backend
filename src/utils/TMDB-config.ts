@@ -28,10 +28,19 @@ async function getUpcoming(): Promise<MovieTrendingList> {
   return data.data;
 }
 
+async function getSearch(text: string): Promise<MovieTrendingList> {
+  const data = await request.get(
+    `https://api.themoviedb.org/3/search/movie?api_key=${api_key}&language=${language}&query=${text}&page=1&include_adult=true`
+  );
+
+  return data.data;
+}
+
 const TMDB = {
   getTrendingNow,
   getTopRated,
   getUpcoming,
+  getSearch,
 };
 
 export default TMDB;

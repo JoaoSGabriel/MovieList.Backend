@@ -1,4 +1,5 @@
 import {
+  getSearchMovies,
   getTopRatedList,
   getTopTrendingList,
   getUpcomingList,
@@ -10,6 +11,7 @@ const moviesRouter = Router();
 moviesRouter
   .get("/toptrendig", getTopTrendingList)
   .get("/toprated", getTopRatedList)
-  .get("/upcoming", getUpcomingList);
+  .get("/upcoming", getUpcomingList)
+  .get("/search/:title", getSearchMovies);
 
 export { moviesRouter };

@@ -31,3 +31,14 @@ export async function getUpcomingList(req: Request, res: Response) {
     return res.sendStatus(httpStatus.INTERNAL_SERVER_ERROR);
   }
 }
+
+export async function getSearchMovies(req: Request, res: Response) {
+  const { title } = req.params;
+  try {
+    const data = await TMDB.getSearch(title);
+    res.status(httpStatus.OK).send(data);
+  } catch (error) {
+    console.log(error.message);
+    return res.sendStatus(httpStatus.INTERNAL_SERVER_ERROR);
+  }
+}
