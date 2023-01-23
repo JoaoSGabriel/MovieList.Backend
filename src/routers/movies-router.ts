@@ -1,4 +1,5 @@
 import {
+  getMovieDetails,
   getSearchMovies,
   getTopRatedList,
   getTopTrendingList,
@@ -12,6 +13,7 @@ moviesRouter
   .get("/toptrendig", getTopTrendingList)
   .get("/toprated", getTopRatedList)
   .get("/upcoming", getUpcomingList)
-  .get("/search/:title", getSearchMovies);
+  .get("/search/:title", getSearchMovies)
+  .get("/details/:movieId", getMovieDetails);
 
 export { moviesRouter };
