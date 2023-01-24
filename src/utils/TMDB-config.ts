@@ -44,12 +44,21 @@ async function getMovieDetails(movieId: number): Promise<MovieTrendingList> {
   return data.data;
 }
 
+async function getCollection(collectionId: number): Promise<MovieTrendingList> {
+  const data = await request.get(
+    `https://api.themoviedb.org/3/collection/${collectionId}?api_key=${api_key}&language=${language}`
+  );
+
+  return data.data;
+}
+
 const TMDB = {
   getTrendingNow,
   getTopRated,
   getUpcoming,
   getSearch,
   getMovieDetails,
+  getCollection,
 };
 
 export default TMDB;

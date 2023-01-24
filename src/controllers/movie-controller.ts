@@ -53,3 +53,14 @@ export async function getMovieDetails(req: Request, res: Response) {
     return res.sendStatus(httpStatus.INTERNAL_SERVER_ERROR);
   }
 }
+
+export async function getCollectionDetails(req: Request, res: Response) {
+  const { collectionId } = req.params;
+  try {
+    const data = await TMDB.getCollection(Number(collectionId));
+    res.status(httpStatus.OK).send(data);
+  } catch (error) {
+    console.log(error.message);
+    return res.sendStatus(httpStatus.INTERNAL_SERVER_ERROR);
+  }
+}
