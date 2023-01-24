@@ -1,7 +1,7 @@
-import userRepository from "@/repositories/user-repository";
+import userRepository from "../repositories/user-repository";
 import { User } from "@prisma/client";
 import bcrypt from "bcrypt";
-import { ApplicationError } from "@/protocols";
+import { ApplicationError } from "../protocols";
 
 export async function createUser({
   email,

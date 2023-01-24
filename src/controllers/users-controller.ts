@@ -1,6 +1,7 @@
 import authenticationService, {
   SignInParams,
-} from "@/services/authentication-service";
+} from "../services/authentication-service";
+import userService from "../services/user-service";
 import { Request, Response } from "express";
 import httpStatus from "http-status";
 
