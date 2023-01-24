@@ -64,3 +64,14 @@ export async function getCollectionDetails(req: Request, res: Response) {
     return res.sendStatus(httpStatus.INTERNAL_SERVER_ERROR);
   }
 }
+
+export async function getMovieCredits(req: Request, res: Response) {
+  const { movieId } = req.params;
+  try {
+    const data = await TMDB.getMovieCredits(Number(movieId));
+    res.status(httpStatus.OK).send(data);
+  } catch (error) {
+    console.log(error.message);
+    return res.sendStatus(httpStatus.INTERNAL_SERVER_ERROR);
+  }
+}

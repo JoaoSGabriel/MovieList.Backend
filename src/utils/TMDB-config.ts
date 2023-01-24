@@ -52,6 +52,14 @@ async function getCollection(collectionId: number): Promise<MovieTrendingList> {
   return data.data;
 }
 
+async function getMovieCredits(movieId: number): Promise<MovieTrendingList> {
+  const data = await request.get(
+    `https://api.themoviedb.org/3/movie/${movieId}/credits?api_key=${api_key}&language=${language}`
+  );
+
+  return data.data;
+}
+
 const TMDB = {
   getTrendingNow,
   getTopRated,
@@ -59,6 +67,7 @@ const TMDB = {
   getSearch,
   getMovieDetails,
   getCollection,
+  getMovieCredits,
 };
 
 export default TMDB;
