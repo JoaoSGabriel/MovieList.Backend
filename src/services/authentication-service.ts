@@ -1,10 +1,17 @@
-import sessionRepository from "@/repositories/session-repository";
-import userRepository from "@/repositories/user-repository";
-import { exclude } from "@/utils/prisma-utils";
+import sessionRepository from "../repositories/session-repository";
+import userRepository from "../repositories/user-repository";
+import { exclude } from "../utils/prisma-utils";
 import { User } from "@prisma/client";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import { invalidCredentialsError } from "./errors";
+import { ApplicationError } from "@/protocols";
+
+function invalidCredentialsError(): ApplicationError {
+  return {
+    name: "InvalidCredentialsError",
+    message: "email or password are incorrect",
+  };
+}
 
 async function signIn(params: SignInParams): Promise<SignInResult> {
   const { email, password } = params;
@@ -61,4 +68,3 @@ const authenticationService = {
 };
 
 export default authenticationService;
-export * from "./errors";
