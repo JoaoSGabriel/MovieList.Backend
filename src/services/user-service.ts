@@ -10,6 +10,7 @@ export async function createUser({
   await validateUniqueEmailOrFail(email);
 
   const hashedPassword = await bcrypt.hash(password, 12);
+
   return userRepository.create({
     email,
     password: hashedPassword,
@@ -18,6 +19,7 @@ export async function createUser({
 
 async function validateUniqueEmailOrFail(email: string) {
   const userWithSameEmail = await userRepository.findByEmail(email);
+
   if (userWithSameEmail) {
     throw duplicatedEmailError();
   }

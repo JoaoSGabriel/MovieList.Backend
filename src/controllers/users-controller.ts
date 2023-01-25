@@ -19,7 +19,7 @@ export async function usersPost(req: Request, res: Response) {
     if (error.name === "DuplicatedEmailError") {
       return res.status(httpStatus.CONFLICT).send(error);
     }
-    return res.status(httpStatus.BAD_REQUEST).send(error);
+    return res.status(httpStatus.BAD_REQUEST).send(error.message);
   }
 }
 
