@@ -6,6 +6,7 @@ dotenv.config();
 import { moviesRouter } from "./routers/movies-router";
 import { usersRouter } from "./routers/users-router";
 import { authenticationRouter } from "./routers/authentication-router";
+import { listMoviesRouter } from "./routers/listMovie-router";
 
 const port = +process.env.PORT;
 
@@ -17,6 +18,7 @@ app
   .use("/movies", moviesRouter)
   .use("/users", usersRouter)
   .use("/auth", authenticationRouter)
+  .use("/action", listMoviesRouter)
   .listen(port, () => {
     console.log(`Server is listening on port ${port}.`);
   });

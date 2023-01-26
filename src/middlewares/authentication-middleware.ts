@@ -3,7 +3,7 @@ import httpStatus from "http-status";
 import * as jwt from "jsonwebtoken";
 
 import { unauthorizedError } from "@/errors/unauthorized-error";
-import { prisma } from "@/config/database";
+import prisma from "../config/database";
 
 export async function authenticateToken(
   req: AuthenticatedRequest,
