@@ -14,7 +14,7 @@ async function setNewFavorit(
   );
 
   if (hasFavorit) {
-    throw requestError(httpStatus.CONFLICT, "Not found favorit movie");
+    throw requestError(httpStatus.CONFLICT, "This movie already are favorit");
   }
 
   await favoritRepository.setFavorit(

@@ -18,6 +18,8 @@ model User {
     updatedAt       DateTime          @updatedAt
     Session         Session[]
     MovieFavorits   MovieFavorits[]
+    PlaningSee      PlaningSee[]
+    Watched         Watched[]
 }
 
 model Session {
@@ -32,7 +34,29 @@ model Session {
 model MovieFavorits {
     id                Int      @id @default(autoincrement())
     userId            Int
-    User              User              @relation(fields: [userId], references: [id])
+    User              User     @relation(fields: [userId], references: [id])
+    tmdbMovieId       Int
+    tmdbTitle         String
+    tmbdPoster_path   String
+    createdAt         DateTime @default(now())
+    updatedAt         DateTime @updatedAt
+}
+
+model PlaningSee {
+    id                Int      @id @default(autoincrement())
+    userId            Int
+    User              User     @relation(fields: [userId], references: [id])
+    tmdbMovieId       Int
+    tmdbTitle         String
+    tmbdPoster_path   String
+    createdAt         DateTime @default(now())
+    updatedAt         DateTime @updatedAt
+}
+
+model Watched {
+    id                Int      @id @default(autoincrement())
+    userId            Int
+    User              User     @relation(fields: [userId], references: [id])
     tmdbMovieId       Int
     tmdbTitle         String
     tmbdPoster_path   String
