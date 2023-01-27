@@ -1,7 +1,7 @@
 import { AuthenticatedRequest } from "../middlewares/authentication-middleware";
 import { Response } from "express";
 import httpStatus from "http-status";
-import listMoviesService from "../services/listMovies-service";
+import favoritService from "../services/favorit-service";
 
 export async function postNewFavoritMovie(
   req: AuthenticatedRequest,
@@ -16,7 +16,7 @@ export async function postNewFavoritMovie(
   const { userId } = req;
 
   try {
-    await listMoviesService.setNewFavorit(
+    await favoritService.setNewFavorit(
       userId,
       tmdbMovieId,
       tmdbTitle,
@@ -37,7 +37,7 @@ export async function checkFavoritMovie(
   const { userId } = req;
 
   try {
-    const favorit = await listMoviesService.searchFavorits(
+    const favorit = await favoritService.searchFavorits(
       userId,
       Number(tmdbMovieId)
     );
@@ -56,7 +56,7 @@ export async function deleteFavoritMovie(
   const { favoritId } = req.query;
 
   try {
-    await listMoviesService.deleteFavorits(Number(favoritId));
+    await favoritService.deleteFavorits(Number(favoritId));
     return res.sendStatus(httpStatus.OK);
   } catch (error) {
     console.log(error.message);

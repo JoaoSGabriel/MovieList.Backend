@@ -34,10 +34,10 @@ async function deleteFavoritMovie(favoritId: number) {
   });
 }
 
-const listMoviesRepository = {
+const favoritRepository = {
   setFavorit,
   getFavoritMovie,
   deleteFavoritMovie,
 };
 
-export default listMoviesRepository;
+export default favoritRepository;

@@ -6,12 +6,12 @@ import {
 import { authenticateToken } from "../middlewares/authentication-middleware";
 import { Router } from "express";
 
-const listMoviesRouter = Router();
+const favoritsRouter = Router();
 
-listMoviesRouter
+favoritsRouter
   .all("/*", authenticateToken)
-  .get("/favorits", checkFavoritMovie)
-  .post("/favorits/new", postNewFavoritMovie)
-  .delete("/favorits", deleteFavoritMovie);
+  .get("/", checkFavoritMovie)
+  .post("/new", postNewFavoritMovie)
+  .delete("/", deleteFavoritMovie);
 
-export { listMoviesRouter };
+export { favoritsRouter };
