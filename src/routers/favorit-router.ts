@@ -2,7 +2,7 @@ import {
   checkFavoritMovie,
   deleteFavoritMovie,
   postNewFavoritMovie,
-} from "../controllers/listMovie-controller";
+} from "../controllers/favorit-controller";
 import { authenticateToken } from "../middlewares/authentication-middleware";
 import { Router } from "express";
 

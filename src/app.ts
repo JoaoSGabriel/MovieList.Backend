@@ -7,6 +7,7 @@ import { moviesRouter } from "./routers/movies-router";
 import { usersRouter } from "./routers/users-router";
 import { authenticationRouter } from "./routers/authentication-router";
 import { favoritsRouter } from "./routers/favorit-router";
+import { planningRouter } from "./routers/planning-router";
 
 const port = +process.env.PORT;
 
@@ -19,6 +20,7 @@ app
   .use("/users", usersRouter)
   .use("/auth", authenticationRouter)
   .use("/favorits", favoritsRouter)
+  .use("/planning", planningRouter)
   .listen(port, () => {
     console.log(`Server is listening on port ${port}.`);
   });
