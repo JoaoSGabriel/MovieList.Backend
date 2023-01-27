@@ -26,9 +26,18 @@ async function getFavoritMovie(userId: number, tmdbMovieId: number) {
   });
 }
 
+async function deleteFavoritMovie(favoritId: number) {
+  return await prisma.movieFavorits.delete({
+    where: {
+      id: favoritId,
+    },
+  });
+}
+
 const listMoviesRepository = {
   setFavorit,
   getFavoritMovie,
+  deleteFavoritMovie,
 };
 
 export default listMoviesRepository;

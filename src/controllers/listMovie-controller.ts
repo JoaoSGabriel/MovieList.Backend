@@ -1,5 +1,5 @@
 import { AuthenticatedRequest } from "../middlewares/authentication-middleware";
-import { Request, Response } from "express";
+import { Response } from "express";
 import httpStatus from "http-status";
 import listMoviesService from "../services/listMovies-service";
 
@@ -46,5 +46,20 @@ export async function checkFavoritMovie(
     if (error.name === "RequestError") {
       return res.sendStatus(httpStatus.NOT_FOUND);
     }
+  }
+}
+
+export async function deleteFavoritMovie(
+  req: AuthenticatedRequest,
+  res: Response
+) {
+  const { favoritId } = req.query;
+
+  try {
+    await listMoviesService.deleteFavorits(Number(favoritId));
+    return res.sendStatus(httpStatus.OK);
+  } catch (error) {
+    console.log(error.message);
+    return res.sendStatus(httpStatus.INTERNAL_SERVER_ERROR);
   }
 }

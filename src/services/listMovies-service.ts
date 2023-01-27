@@ -40,6 +40,11 @@ async function searchFavorits(userId: number, tmdbMovieId: number) {
   return hasFavorit;
 }
 
-const listMoviesService = { setNewFavorit, searchFavorits };
+async function deleteFavorits(favoritId: number) {
+  await listMoviesRepository.deleteFavoritMovie(favoritId);
+  return;
+}
+
+const listMoviesService = { setNewFavorit, searchFavorits, deleteFavorits };
 
 export default listMoviesService;
