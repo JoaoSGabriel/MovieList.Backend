@@ -38,11 +38,11 @@ export async function checkPlanningMovie(
   const { userId } = req;
 
   try {
-    const favorit = await planningService.searchPlanning(
+    const planning = await planningService.searchPlanning(
       userId,
       Number(tmdbMovieId)
     );
-    return res.status(httpStatus.OK).send(favorit);
+    return res.status(httpStatus.OK).send(planning);
   } catch (error) {
     if (error.name === "RequestError") {
       return res.sendStatus(httpStatus.NOT_FOUND);
@@ -54,10 +54,10 @@ export async function deletePlanningMovie(
   req: AuthenticatedRequest,
   res: Response
 ) {
-  const { favoritId } = req.query;
+  const { planningId } = req.query;
 
   try {
-    await planningService.deletePlanningMovie(Number(favoritId));
+    await planningService.deletePlanningMovie(Number(planningId));
     return res.sendStatus(httpStatus.OK);
   } catch (error) {
     console.log(error.message);

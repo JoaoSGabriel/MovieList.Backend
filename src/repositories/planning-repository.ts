@@ -1,4 +1,3 @@
-import { PrismaClient } from "@prisma/client";
 import prisma from "../config/database";
 
 async function setPlanning(
@@ -26,10 +25,10 @@ async function getPlanningMovies(userId: number, tmdbMovieId: number) {
   });
 }
 
-async function deletePlanningMovie(favoritId: number) {
+async function deletePlanningMovie(planningId: number) {
   return await prisma.planingSee.delete({
     where: {
-      id: favoritId,
+      id: planningId,
     },
   });
 }

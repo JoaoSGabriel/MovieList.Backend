@@ -40,8 +40,8 @@ async function searchPlanning(userId: number, tmdbMovieId: number) {
   return hasFavorit;
 }
 
-async function deletePlanningMovie(favoritId: number) {
-  await planningRepository.deletePlanningMovie(favoritId);
+async function deletePlanningMovie(planningId: number) {
+  await planningRepository.deletePlanningMovie(planningId);
   return;
 }
 
