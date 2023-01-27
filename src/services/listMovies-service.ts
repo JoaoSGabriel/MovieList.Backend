@@ -1,3 +1,5 @@
+import httpStatus from "http-status";
+import { requestError } from "../errors/request-error";
 import listMoviesRepository from "../repositories/listMovies-repository";
 
 async function setNewFavorit(
@@ -6,15 +8,38 @@ async function setNewFavorit(
   tmdbTitle: string,
   tmbdPoster_path: string
 ) {
-  const favorit = await listMoviesRepository.setFavorit(
+  const hasFavorit = await listMoviesRepository.getFavoritMovie(
+    userId,
+    tmdbMovieId
+  );
+
+  if (hasFavorit) {
+    throw requestError(httpStatus.CONFLICT, "Not found favorit movie");
+  }
+
+  await listMoviesRepository.setFavorit(
     userId,
     tmdbMovieId,
     tmdbTitle,
     tmbdPoster_path
   );
-  return favorit;
+
+  return;
 }
 
-const listMoviesService = { setNewFavorit };
+async function searchFavorits(userId: number, tmdbMovieId: number) {
+  const hasFavorit = await listMoviesRepository.getFavoritMovie(
+    userId,
+    tmdbMovieId
+  );
+
+  if (!hasFavorit) {
+    throw requestError(httpStatus.NOT_FOUND, "Not found favorit movie");
+  }
+
+  return hasFavorit;
+}
+
+const listMoviesService = { setNewFavorit, searchFavorits };
 
 export default listMoviesService;

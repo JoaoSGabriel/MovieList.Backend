@@ -17,8 +17,18 @@ async function setFavorit(
   });
 }
 
+async function getFavoritMovie(userId: number, tmdbMovieId: number) {
+  return await prisma.movieFavorits.findFirst({
+    where: {
+      userId,
+      tmdbMovieId,
+    },
+  });
+}
+
 const listMoviesRepository = {
   setFavorit,
+  getFavoritMovie,
 };
 
 export default listMoviesRepository;
