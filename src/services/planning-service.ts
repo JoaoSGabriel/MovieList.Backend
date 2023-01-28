@@ -45,6 +45,17 @@ async function deletePlanningMovie(planningId: number) {
   return;
 }
 
-const planningService = { setNewPlanning, searchPlanning, deletePlanningMovie };
+async function searchAllPlanning(userId: number) {
+  const planning = await planningRepository.getAllPlanning(userId);
+
+  return planning;
+}
+
+const planningService = {
+  setNewPlanning,
+  searchPlanning,
+  deletePlanningMovie,
+  searchAllPlanning,
+};
 
 export default planningService;

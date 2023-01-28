@@ -64,3 +64,18 @@ export async function deletePlanningMovie(
     return res.sendStatus(httpStatus.INTERNAL_SERVER_ERROR);
   }
 }
+
+export async function getAllPlanningMovies(
+  req: AuthenticatedRequest,
+  res: Response
+) {
+  const { userId } = req;
+
+  try {
+    const planning = await planningService.searchAllPlanning(userId);
+    return res.status(httpStatus.OK).send(planning);
+  } catch (error) {
+    console.log(error.message);
+    return res.sendStatus(httpStatus.INTERNAL_SERVER_ERROR);
+  }
+}

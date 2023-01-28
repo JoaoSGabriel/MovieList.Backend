@@ -33,10 +33,19 @@ async function deletePlanningMovie(planningId: number) {
   });
 }
 
+async function getAllPlanning(userId: number) {
+  return await prisma.planingSee.findMany({
+    where: {
+      userId,
+    },
+  });
+}
+
 const planningRepository = {
   setPlanning,
   getPlanningMovies,
   deletePlanningMovie,
+  getAllPlanning,
 };
 
 export default planningRepository;
