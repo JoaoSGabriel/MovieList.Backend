@@ -34,10 +34,19 @@ async function deleteFavoritMovie(favoritId: number) {
   });
 }
 
+async function getAllFavorits(userId: number) {
+  return await prisma.movieFavorits.findMany({
+    where: {
+      userId,
+    },
+  });
+}
+
 const favoritRepository = {
   setFavorit,
   getFavoritMovie,
   deleteFavoritMovie,
+  getAllFavorits,
 };
 
 export default favoritRepository;

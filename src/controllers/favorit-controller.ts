@@ -63,3 +63,18 @@ export async function deleteFavoritMovie(
     return res.sendStatus(httpStatus.INTERNAL_SERVER_ERROR);
   }
 }
+
+export async function getAllFavoritMovies(
+  req: AuthenticatedRequest,
+  res: Response
+) {
+  const { userId } = req;
+
+  try {
+    const favorits = await favoritService.searchAllFavorits(userId);
+    return res.status(httpStatus.OK).send(favorits);
+  } catch (error) {
+    console.log(error.message);
+    return res.sendStatus(httpStatus.INTERNAL_SERVER_ERROR);
+  }
+}

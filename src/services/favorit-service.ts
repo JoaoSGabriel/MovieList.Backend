@@ -45,6 +45,17 @@ async function deleteFavorits(favoritId: number) {
   return;
 }
 
-const favoritService = { setNewFavorit, searchFavorits, deleteFavorits };
+async function searchAllFavorits(userId: number) {
+  const favorits = await favoritRepository.getAllFavorits(userId);
+
+  return favorits;
+}
+
+const favoritService = {
+  setNewFavorit,
+  searchFavorits,
+  deleteFavorits,
+  searchAllFavorits,
+};
 
 export default favoritService;
