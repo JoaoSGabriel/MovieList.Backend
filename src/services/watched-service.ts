@@ -45,10 +45,17 @@ async function deleteWatchedMovie(watchedMovieId: number) {
   return;
 }
 
+async function searchAllWatched(userId: number) {
+  const planning = await watchedRepository.getAllWatched(userId);
+
+  return planning;
+}
+
 const watchedService = {
   setMovieWatched,
   searchWatchedMovie,
   deleteWatchedMovie,
+  searchAllWatched,
 };
 
 export default watchedService;

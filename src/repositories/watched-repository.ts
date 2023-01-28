@@ -33,10 +33,19 @@ async function deleteWatchedMovie(watchedMovieId: number) {
   });
 }
 
+async function getAllWatched(userId: number) {
+  return await prisma.watched.findMany({
+    where: {
+      userId,
+    },
+  });
+}
+
 const watchedRepository = {
   setWatched,
   getWatchedMovies,
   deleteWatchedMovie,
+  getAllWatched,
 };
 
 export default watchedRepository;

@@ -64,3 +64,18 @@ export async function deleteWatchedMovie(
     return res.sendStatus(httpStatus.INTERNAL_SERVER_ERROR);
   }
 }
+
+export async function getAllWatchedMovies(
+  req: AuthenticatedRequest,
+  res: Response
+) {
+  const { userId } = req;
+
+  try {
+    const watched = await watchedService.searchAllWatched(userId);
+    return res.status(httpStatus.OK).send(watched);
+  } catch (error) {
+    console.log(error.message);
+    return res.sendStatus(httpStatus.INTERNAL_SERVER_ERROR);
+  }
+}
