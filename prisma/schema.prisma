@@ -48,6 +48,8 @@ model MovieFavorits {
     id                Int      @id @default(autoincrement())
     userId            Int
     User              User     @relation(fields: [userId], references: [id])
+    historyId         Int
+    History           History  @relation(fields: [historyId], references: [id])
     tmdbMovieId       Int
     tmdbTitle         String
     tmbdPoster_path   String
@@ -59,6 +61,8 @@ model PlaningSee {
     id                Int      @id @default(autoincrement())
     userId            Int
     User              User     @relation(fields: [userId], references: [id])
+    historyId         Int
+    History           History  @relation(fields: [historyId], references: [id])
     tmdbMovieId       Int
     tmdbTitle         String
     tmbdPoster_path   String
@@ -70,6 +74,8 @@ model Watched {
     id                Int      @id @default(autoincrement())
     userId            Int
     User              User     @relation(fields: [userId], references: [id])
+    historyId         Int
+    History           History  @relation(fields: [historyId], references: [id])
     tmdbMovieId       Int
     tmdbTitle         String
     tmbdPoster_path   String
@@ -82,12 +88,11 @@ model History {
     userId            Int
     User              User          @relation(fields: [userId], references: [id])
     type              HistoryType
-    tmdbMovieId       Int
-    tmdbTitle         String
-    tmbdPoster_path   String
-    actionId          Int
     createdAt         DateTime      @default(now())
     updatedAt         DateTime      @updatedAt
+    Watched           Watched[]
+    PlaningSee        PlaningSee[]
+    MovieFavorits     MovieFavorits[]
 }
 
 enum HistoryType {

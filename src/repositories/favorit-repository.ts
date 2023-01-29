@@ -5,10 +5,12 @@ async function setFavorit(
   userId: number,
   tmdbMovieId: number,
   tmdbTitle: string,
-  tmbdPoster_path: string
+  tmbdPoster_path: string,
+  historyId: number
 ) {
   return prisma.movieFavorits.create({
     data: {
+      historyId,
       tmdbMovieId: tmdbMovieId,
       tmdbTitle: tmdbTitle,
       tmbdPoster_path: tmbdPoster_path,

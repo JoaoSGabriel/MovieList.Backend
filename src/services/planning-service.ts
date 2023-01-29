@@ -1,3 +1,4 @@
+import historyRepository from "../repositories/history-repositorie";
 import httpStatus from "http-status";
 import { requestError } from "../errors/request-error";
 import planningRepository from "../repositories/planning-repository";
@@ -17,11 +18,14 @@ async function setNewPlanning(
     throw requestError(httpStatus.CONFLICT, "This movie already are favorit");
   }
 
+  const history = await historyRepository.createHistory(userId, "PLANNING");
+
   await planningRepository.setPlanning(
     userId,
     tmdbMovieId,
     tmdbTitle,
-    tmbdPoster_path
+    tmbdPoster_path,
+    history.id
   );
 
   return;

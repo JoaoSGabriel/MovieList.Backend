@@ -1,3 +1,4 @@
+import historyRepository from "../repositories/history-repositorie";
 import httpStatus from "http-status";
 import { requestError } from "../errors/request-error";
 import favoritRepository from "../repositories/favorit-repository";
@@ -17,11 +18,14 @@ async function setNewFavorit(
     throw requestError(httpStatus.CONFLICT, "This movie already are favorit");
   }
 
+  const history = await historyRepository.createHistory(userId, "LIKED");
+
   await favoritRepository.setFavorit(
     userId,
     tmdbMovieId,
     tmdbTitle,
-    tmbdPoster_path
+    tmbdPoster_path,
+    history.id
   );
 
   return;

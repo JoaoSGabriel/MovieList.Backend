@@ -4,10 +4,12 @@ async function setWatched(
   userId: number,
   tmdbMovieId: number,
   tmdbTitle: string,
-  tmbdPoster_path: string
+  tmbdPoster_path: string,
+  historyId: number
 ) {
   return prisma.watched.create({
     data: {
+      historyId,
       tmdbMovieId: tmdbMovieId,
       tmdbTitle: tmdbTitle,
       tmbdPoster_path: tmbdPoster_path,
