@@ -15,6 +15,11 @@ async function searchUserHistory(userId: number) {
     where: {
       userId,
     },
+    orderBy: [
+      {
+        createdAt: "desc",
+      },
+    ],
     include: {
       Watched: true,
       PlaningSee: true,
