@@ -24,7 +24,7 @@ export async function getProfileByUsername(
 }
 
 export async function putProfile(req: AuthenticatedRequest, res: Response) {
-  const { username, poster_path, backdrop_path } = req.body;
+  const { username, photo_path, backdrop_path } = req.body;
 
   if (!username) {
     return res.sendStatus(httpStatus.BAD_REQUEST);
@@ -35,14 +35,15 @@ export async function putProfile(req: AuthenticatedRequest, res: Response) {
   try {
     await profileService.updateProfile(userId, {
       username,
-      poster_path,
+      photo_path,
       backdrop_path,
     });
 
-    res.sendStatus(httpStatus.OK);
+    return res.sendStatus(httpStatus.OK);
   } catch (error) {
     if (error.name === "RequestError") {
-      res.sendStatus(httpStatus.NOT_FOUND);
+      console.log("leu o erro");
+      return res.sendStatus(httpStatus.NOT_FOUND);
     }
     res.sendStatus(httpStatus.INTERNAL_SERVER_ERROR);
   }
