@@ -17,7 +17,7 @@ export async function getProfileByUsername(
     res.status(httpStatus.OK).send(profile);
   } catch (error) {
     if (error.name === "RequestError") {
-      res.sendStatus(httpStatus.NOT_FOUND);
+      return res.sendStatus(httpStatus.NOT_FOUND);
     }
     res.sendStatus(httpStatus.INTERNAL_SERVER_ERROR);
   }
@@ -42,7 +42,6 @@ export async function putProfile(req: AuthenticatedRequest, res: Response) {
     return res.sendStatus(httpStatus.OK);
   } catch (error) {
     if (error.name === "RequestError") {
-      console.log("leu o erro");
       return res.sendStatus(httpStatus.NOT_FOUND);
     }
     res.sendStatus(httpStatus.INTERNAL_SERVER_ERROR);
