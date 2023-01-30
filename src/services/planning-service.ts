@@ -15,7 +15,10 @@ async function setNewPlanning(
   );
 
   if (hasPlanning) {
-    throw requestError(httpStatus.CONFLICT, "This movie already are favorit");
+    throw requestError(
+      httpStatus.CONFLICT,
+      "This movie already are in planning calendar"
+    );
   }
 
   const history = await historyRepository.createHistory(userId, "PLANNING");
@@ -32,20 +35,25 @@ async function setNewPlanning(
 }
 
 async function searchPlanning(userId: number, tmdbMovieId: number) {
-  const hasFavorit = await planningRepository.getPlanningMovies(
+  const planning = await planningRepository.getPlanningMovies(
     userId,
     tmdbMovieId
   );
 
-  if (!hasFavorit) {
-    throw requestError(httpStatus.NOT_FOUND, "Not found favorit movie");
+  if (!planning) {
+    throw requestError(httpStatus.NOT_FOUND, "Not found planning movie");
   }
 
-  return hasFavorit;
+  return planning;
 }
 
 async function deletePlanningMovie(planningId: number) {
+  const planning = await planningRepository.searchUniquePlanning(planningId);
+
   await planningRepository.deletePlanningMovie(planningId);
+
+  await historyRepository.deleteOneHistory(planning.historyId);
+
   return;
 }
 

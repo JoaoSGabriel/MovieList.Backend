@@ -27,6 +27,14 @@ async function getPlanningMovies(userId: number, tmdbMovieId: number) {
   });
 }
 
+async function searchUniquePlanning(planningId: number) {
+  return await prisma.planingSee.findUnique({
+    where: {
+      id: planningId,
+    },
+  });
+}
+
 async function deletePlanningMovie(planningId: number) {
   return await prisma.planingSee.delete({
     where: {
@@ -46,6 +54,7 @@ async function getAllPlanning(userId: number) {
 const planningRepository = {
   setPlanning,
   getPlanningMovies,
+  searchUniquePlanning,
   deletePlanningMovie,
   getAllPlanning,
 };

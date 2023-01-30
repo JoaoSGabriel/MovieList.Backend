@@ -28,9 +28,18 @@ async function searchUserHistory(userId: number) {
   });
 }
 
+async function deleteOneHistory(historyId: number) {
+  return prisma.history.delete({
+    where: {
+      id: historyId,
+    },
+  });
+}
+
 const historyRepository = {
   createHistory,
   searchUserHistory,
+  deleteOneHistory,
 };
 
 export default historyRepository;
