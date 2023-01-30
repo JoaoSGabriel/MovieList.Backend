@@ -36,6 +36,14 @@ async function deleteFavoritMovie(favoritId: number) {
   });
 }
 
+async function searchUniqueFavorit(favoritId: number) {
+  return await prisma.movieFavorits.findUnique({
+    where: {
+      id: favoritId,
+    },
+  });
+}
+
 async function getAllFavorits(userId: number) {
   return await prisma.movieFavorits.findMany({
     where: {
@@ -48,6 +56,7 @@ const favoritRepository = {
   setFavorit,
   getFavoritMovie,
   deleteFavoritMovie,
+  searchUniqueFavorit,
   getAllFavorits,
 };
 

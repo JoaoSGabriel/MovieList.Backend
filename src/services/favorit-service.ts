@@ -45,7 +45,12 @@ async function searchFavorits(userId: number, tmdbMovieId: number) {
 }
 
 async function deleteFavorits(favoritId: number) {
+  const favorit = await favoritRepository.searchUniqueFavorit(favoritId);
+
   await favoritRepository.deleteFavoritMovie(favoritId);
+
+  await historyRepository.deleteOneHistory(favorit.historyId);
+
   return;
 }
 
