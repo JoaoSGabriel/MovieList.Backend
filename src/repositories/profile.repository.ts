@@ -15,9 +15,26 @@ async function findByUsername(username: string) {
   });
 }
 
+async function updateUsernameProfile(
+  userId: number,
+  data: Prisma.ProfileUpdateInput
+) {
+  return prisma.profile.update({
+    where: {
+      userId,
+    },
+    data: {
+      username: data.username,
+      photo_path: data.photo_path,
+      backdrop_path: data.backdrop_path,
+    },
+  });
+}
+
 const profileRepository = {
   create,
   findByUsername,
+  updateUsernameProfile,
 };
 
 export default profileRepository;

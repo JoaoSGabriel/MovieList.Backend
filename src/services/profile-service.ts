@@ -12,8 +12,15 @@ async function getProfile(username: string) {
   return profile;
 }
 
+async function updateProfile(userId: number, body: object) {
+  await profileRepository.updateUsernameProfile(userId, body);
+
+  return;
+}
+
 const profileService = {
   getProfile,
+  updateProfile,
 };
 
 export default profileService;
