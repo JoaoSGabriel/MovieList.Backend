@@ -3,18 +3,31 @@ import { User } from "@prisma/client";
 import bcrypt from "bcrypt";
 import { ApplicationError } from "../protocols";
 
-export async function createUser({
-  email,
-  password,
-}: CreateUserParams): Promise<User> {
+export async function createUser(
+  { email, password }: CreateUserParams,
+  username: string
+) {
   await validateUniqueEmailOrFail(email);
+
+  await validateUniqueUsername(username);
 
   const hashedPassword = await bcrypt.hash(password, 12);
 
-  return userRepository.create({
+  const user = await userRepository.create({
     email,
     password: hashedPassword,
   });
+
+  const profile = await userRepository.createProfile({
+    username,
+    userId: user.id,
+  });
+
+  return {
+    id: user.id,
+    email: user.email,
+    username: profile.username,
+  };
 }
 
 async function validateUniqueEmailOrFail(email: string) {
@@ -25,10 +38,25 @@ async function validateUniqueEmailOrFail(email: string) {
   }
 }
 
+async function validateUniqueUsername(username: string) {
+  const invalidUsername = await userRepository.findByUsername(username);
+
+  if (invalidUsername) {
+    throw usernameInUse();
+  }
+}
+
 export function duplicatedEmailError(): ApplicationError {
   return {
     name: "DuplicatedEmailError",
     message: "There is already an user with given email",
+  };
+}
+
+export function usernameInUse(): ApplicationError {
+  return {
+    name: "InvalidUsername",
+    message: "There is already an user with given username",
   };
 }
 

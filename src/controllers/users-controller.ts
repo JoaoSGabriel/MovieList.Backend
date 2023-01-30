@@ -6,18 +6,18 @@ import { Request, Response } from "express";
 import httpStatus from "http-status";
 
 export async function usersPost(req: Request, res: Response) {
-  const { email, password } = req.body;
+  const { email, password, username } = req.body;
 
   try {
-    const user = await userService.createUser({ email, password });
+    const user = await userService.createUser({ email, password }, username);
 
-    return res.status(httpStatus.CREATED).json({
-      id: user.id,
-      email: user.email,
-    });
+    return res.status(httpStatus.CREATED).json({ user });
   } catch (error) {
     if (error.name === "DuplicatedEmailError") {
-      return res.status(httpStatus.CONFLICT).send(error);
+      return res.sendStatus(httpStatus.CONFLICT);
+    }
+    if (error.name === "InvalidUsername") {
+      return res.sendStatus(httpStatus.CONFLICT);
     }
     return res.status(httpStatus.BAD_REQUEST).send(error.message);
   }

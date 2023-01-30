@@ -29,8 +29,8 @@ model Profile {
     userId          Int               @unique
     User            User              @relation(fields: [userId], references: [id])
     username        String            @unique @db.VarChar(255)
-    photo_path      String
-    backdrop_path   String        
+    photo_path      String?
+    backdrop_path   String?        
     createdAt       DateTime          @default(now())
     updatedAt       DateTime          @updatedAt
 }
