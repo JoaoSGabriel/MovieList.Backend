@@ -45,7 +45,12 @@ async function searchWatchedMovie(userId: number, tmdbMovieId: number) {
 }
 
 async function deleteWatchedMovie(watchedMovieId: number) {
+  const watched = await watchedRepository.searchUniqueWatched(watchedMovieId);
+
   await watchedRepository.deleteWatchedMovie(watchedMovieId);
+
+  await historyRepository.deleteOneHistory(watched.historyId);
+
   return;
 }
 

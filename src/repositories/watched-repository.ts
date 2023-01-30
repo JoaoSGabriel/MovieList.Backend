@@ -35,6 +35,14 @@ async function deleteWatchedMovie(watchedMovieId: number) {
   });
 }
 
+async function searchUniqueWatched(watchedMovieId: number) {
+  return await prisma.watched.findUnique({
+    where: {
+      id: watchedMovieId,
+    },
+  });
+}
+
 async function getAllWatched(userId: number) {
   return await prisma.watched.findMany({
     where: {
@@ -47,6 +55,7 @@ const watchedRepository = {
   setWatched,
   getWatchedMovies,
   deleteWatchedMovie,
+  searchUniqueWatched,
   getAllWatched,
 };
 
