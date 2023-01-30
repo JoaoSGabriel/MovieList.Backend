@@ -1,5 +1,5 @@
 import userRepository from "../repositories/user-repository";
-import { User } from "@prisma/client";
+import { Profile, User } from "@prisma/client";
 import bcrypt from "bcrypt";
 import { ApplicationError } from "../protocols";
 
@@ -61,6 +61,11 @@ export function usernameInUse(): ApplicationError {
 }
 
 export type CreateUserParams = Pick<User, "email" | "password">;
+export type CreateUserProcess = {
+  email: string;
+  password: string;
+  username: string;
+};
 
 const userService = {
   createUser,

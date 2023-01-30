@@ -1,7 +1,7 @@
 import sessionRepository from "../repositories/session-repository";
 import userRepository from "../repositories/user-repository";
 import { exclude } from "../utils/prisma-utils";
-import { User } from "@prisma/client";
+import { Profile, User } from "@prisma/client";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { ApplicationError } from "@/protocols";
@@ -33,6 +33,13 @@ async function getUserOrFail(email: string): Promise<GetUserOrFailResult> {
     id: true,
     email: true,
     password: true,
+    Profile: {
+      select: {
+        username: true,
+        backdrop_path: true,
+        photo_path: true,
+      },
+    },
   });
   if (!user) throw invalidCredentialsError();
 

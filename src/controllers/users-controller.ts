@@ -13,13 +13,14 @@ export async function usersPost(req: Request, res: Response) {
 
     return res.status(httpStatus.CREATED).json({ user });
   } catch (error) {
+    console.log(error.message);
     if (error.name === "DuplicatedEmailError") {
       return res.sendStatus(httpStatus.CONFLICT);
     }
     if (error.name === "InvalidUsername") {
       return res.sendStatus(httpStatus.CONFLICT);
     }
-    return res.status(httpStatus.BAD_REQUEST).send(error.message);
+    return res.sendStatus(httpStatus.BAD_REQUEST);
   }
 }
 
