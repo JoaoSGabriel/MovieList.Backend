@@ -1,7 +1,8 @@
 import userRepository from "../repositories/user-repository";
-import { Profile, User } from "@prisma/client";
+import { User } from "@prisma/client";
 import bcrypt from "bcrypt";
 import { ApplicationError } from "../protocols";
+import profileRepository from "../repositories/profile.repository";
 
 export async function createUser(
   { email, password }: CreateUserParams,
@@ -18,7 +19,7 @@ export async function createUser(
     password: hashedPassword,
   });
 
-  const profile = await userRepository.createProfile({
+  const profile = await profileRepository.create({
     username,
     userId: user.id,
   });
@@ -39,7 +40,7 @@ async function validateUniqueEmailOrFail(email: string) {
 }
 
 async function validateUniqueUsername(username: string) {
-  const invalidUsername = await userRepository.findByUsername(username);
+  const invalidUsername = await profileRepository.findByUsername(username);
 
   if (invalidUsername) {
     throw usernameInUse();
