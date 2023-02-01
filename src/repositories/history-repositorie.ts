@@ -24,6 +24,7 @@ async function searchUserHistory(userId: number) {
       Watched: true,
       PlaningSee: true,
       MovieFavorits: true,
+      Like: true,
     },
   });
 }

@@ -1,5 +1,5 @@
+import interactionRepository from "../repositories/interaction-repository";
 import historyRepository from "../repositories/history-repositorie";
-import httpStatus from "http-status";
 import profileRepository from "../repositories/profile.repository";
 
 async function SearchAllHistory(username: string) {
@@ -10,8 +10,15 @@ async function SearchAllHistory(username: string) {
   return history;
 }
 
+async function searchHistoryInfo(historyId: number) {
+  const history = await interactionRepository.findHistoryInfo(historyId);
+
+  return history;
+}
+
 const historyService = {
   SearchAllHistory,
+  searchHistoryInfo,
 };
 
 export default historyService;

@@ -1,12 +1,9 @@
 import { AuthenticatedRequest } from "../middlewares/authentication-middleware";
-import { Response } from "express";
+import { Request, Response } from "express";
 import httpStatus from "http-status";
 import historyService from "../services/history-service";
 
-export async function getAllHistoryInteractions(
-  req: AuthenticatedRequest,
-  res: Response
-) {
+export async function getAllHistoryInteractions(req: Request, res: Response) {
   const { username } = req.query;
 
   if (typeof username !== "string") {
@@ -15,6 +12,18 @@ export async function getAllHistoryInteractions(
 
   try {
     const history = await historyService.SearchAllHistory(username);
+    res.status(httpStatus.OK).send(history);
+  } catch (error) {
+    return res.sendStatus(httpStatus.INTERNAL_SERVER_ERROR);
+  }
+}
+
+export async function getHistoryInfo(req: Request, res: Response) {
+  const { historyId } = req.query;
+
+  try {
+    const history = await historyService.searchHistoryInfo(Number(historyId));
+
     res.status(httpStatus.OK).send(history);
   } catch (error) {
     return res.sendStatus(httpStatus.INTERNAL_SERVER_ERROR);
