@@ -13,6 +13,11 @@ async function findHistoryInfo(historyId: number) {
       createdAt: true,
       Like: true,
       Comment: {
+        orderBy: [
+          {
+            createdAt: "desc",
+          },
+        ],
         select: {
           User: {
             include: {
@@ -21,6 +26,7 @@ async function findHistoryInfo(historyId: number) {
           },
           comment: true,
           createdAt: true,
+          id: true,
         },
       },
     },
@@ -30,6 +36,14 @@ async function findHistoryInfo(historyId: number) {
 async function createComment(data: Prisma.CommentUncheckedCreateInput) {
   return prisma.comment.create({
     data,
+  });
+}
+
+async function deleteComment(commentId: number) {
+  return prisma.comment.delete({
+    where: {
+      id: commentId,
+    },
   });
 }
 
@@ -48,6 +62,7 @@ async function removeLike(likeId: number) {
 const interactionRepository = {
   findHistoryInfo,
   createComment,
+  deleteComment,
   addLikeOnHistory,
   removeLike,
 };

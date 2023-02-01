@@ -22,6 +22,12 @@ async function setLikeOnHistory(historyId: number, userId: number) {
   return;
 }
 
+async function deleteComment(commentId: number) {
+  await interactionRepository.deleteComment(commentId);
+
+  return;
+}
+
 async function deleteLike(likeId: number) {
   await interactionRepository.removeLike(likeId);
 
@@ -42,6 +48,7 @@ const historyService = {
   SearchAllHistory,
   searchHistoryInfo,
   setLikeOnHistory,
+  deleteComment,
   deleteLike,
   createComment,
 };

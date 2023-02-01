@@ -61,6 +61,21 @@ export async function postLikeHistory(
   }
 }
 
+export async function deletecommentHistory(
+  req: AuthenticatedRequest,
+  res: Response
+) {
+  const { commentId } = req.query;
+
+  try {
+    await historyService.deleteComment(Number(commentId));
+
+    res.sendStatus(httpStatus.OK);
+  } catch (error) {
+    return res.sendStatus(httpStatus.INTERNAL_SERVER_ERROR);
+  }
+}
+
 export async function deleteLikeHistory(
   req: AuthenticatedRequest,
   res: Response

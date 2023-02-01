@@ -1,6 +1,7 @@
 import { authenticateToken } from "../middlewares/authentication-middleware";
 import { Router } from "express";
 import {
+  deletecommentHistory,
   deleteLikeHistory,
   getAllHistoryInteractions,
   getHistoryInfo,
@@ -16,6 +17,7 @@ historyRouter
   .all("/*", authenticateToken)
   .post("/comment", postComment)
   .post("/like", postLikeHistory)
-  .delete("/like", deleteLikeHistory);
+  .delete("/like", deleteLikeHistory)
+  .delete("/comment", deletecommentHistory);
 
 export { historyRouter };
