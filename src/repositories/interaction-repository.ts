@@ -7,6 +7,10 @@ async function findHistoryInfo(historyId: number) {
       id: historyId,
     },
     select: {
+      id: true,
+      userId: true,
+      type: true,
+      createdAt: true,
       Like: true,
       Comment: {
         select: {
