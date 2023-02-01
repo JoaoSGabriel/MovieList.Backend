@@ -16,9 +16,16 @@ async function searchHistoryInfo(historyId: number) {
   return history;
 }
 
+async function setLikeOnHistory(historyId: number, userId: number) {
+  await interactionRepository.addLikeOnHistory({ userId, historyId });
+
+  return;
+}
+
 const historyService = {
   SearchAllHistory,
   searchHistoryInfo,
+  setLikeOnHistory,
 };
 
 export default historyService;
