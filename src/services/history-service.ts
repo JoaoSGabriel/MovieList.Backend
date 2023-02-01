@@ -1,9 +1,11 @@
 import historyRepository from "../repositories/history-repositorie";
 import httpStatus from "http-status";
-import { requestError } from "../errors/request-error";
+import profileRepository from "../repositories/profile.repository";
 
-async function SearchAllHistory(userId: number) {
-  const history = await historyRepository.searchUserHistory(userId);
+async function SearchAllHistory(username: string) {
+  const user = await profileRepository.findByUsername(username);
+
+  const history = await historyRepository.searchUserHistory(user.userId);
 
   return history;
 }

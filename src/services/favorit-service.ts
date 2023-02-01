@@ -2,6 +2,7 @@ import historyRepository from "../repositories/history-repositorie";
 import httpStatus from "http-status";
 import { requestError } from "../errors/request-error";
 import favoritRepository from "../repositories/favorit-repository";
+import profileRepository from "../repositories/profile.repository";
 
 async function setNewFavorit(
   userId: number,
@@ -54,8 +55,10 @@ async function deleteFavorits(favoritId: number) {
   return;
 }
 
-async function searchAllFavorits(userId: number) {
-  const favorits = await favoritRepository.getAllFavorits(userId);
+async function searchAllFavorits(username: string) {
+  const user = await profileRepository.findByUsername(username);
+
+  const favorits = await favoritRepository.getAllFavorits(user.userId);
 
   return favorits;
 }

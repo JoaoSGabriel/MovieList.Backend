@@ -68,10 +68,14 @@ export async function getAllFavoritMovies(
   req: AuthenticatedRequest,
   res: Response
 ) {
-  const { userId } = req;
+  const { username } = req.query;
+
+  if (typeof username !== "string") {
+    return res.sendStatus(httpStatus.BAD_REQUEST);
+  }
 
   try {
-    const favorits = await favoritService.searchAllFavorits(userId);
+    const favorits = await favoritService.searchAllFavorits(username);
     return res.status(httpStatus.OK).send(favorits);
   } catch (error) {
     console.log(error.message);
