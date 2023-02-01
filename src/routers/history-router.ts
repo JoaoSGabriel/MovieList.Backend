@@ -4,6 +4,7 @@ import {
   deleteLikeHistory,
   getAllHistoryInteractions,
   getHistoryInfo,
+  postComment,
   postLikeHistory,
 } from "../controllers/history-controller";
 
@@ -13,6 +14,7 @@ historyRouter
   .get("/", getAllHistoryInteractions)
   .get("/info", getHistoryInfo)
   .all("/*", authenticateToken)
+  .post("/comment", postComment)
   .post("/like", postLikeHistory)
   .delete("/like", deleteLikeHistory);
 

@@ -30,6 +30,20 @@ export async function getHistoryInfo(req: Request, res: Response) {
   }
 }
 
+export async function postComment(req: AuthenticatedRequest, res: Response) {
+  const { comment, historyId } = req.body;
+
+  const { userId } = req;
+
+  try {
+    await historyService.createComment(userId, Number(historyId), comment);
+
+    res.sendStatus(httpStatus.CREATED);
+  } catch (error) {
+    return res.sendStatus(httpStatus.INTERNAL_SERVER_ERROR);
+  }
+}
+
 export async function postLikeHistory(
   req: AuthenticatedRequest,
   res: Response

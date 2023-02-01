@@ -28,11 +28,22 @@ async function deleteLike(likeId: number) {
   return;
 }
 
+async function createComment(
+  userId: number,
+  historyId: number,
+  comment: string
+) {
+  await interactionRepository.createComment({ userId, historyId, comment });
+
+  return;
+}
+
 const historyService = {
   SearchAllHistory,
   searchHistoryInfo,
   setLikeOnHistory,
   deleteLike,
+  createComment,
 };
 
 export default historyService;
