@@ -24,6 +24,7 @@ model User {
     History         History[]
     Comment         Comment[]
     Like            Like[]
+    Rated           Rated[]
 }
 
 model Profile {
@@ -78,6 +79,18 @@ model Watched {
     User              User     @relation(fields: [userId], references: [id])
     historyId         Int
     History           History  @relation(fields: [historyId], references: [id])
+    tmdbMovieId       Int
+    tmdbTitle         String
+    tmbdPoster_path   String
+    createdAt         DateTime @default(now())
+    updatedAt         DateTime @updatedAt
+}
+
+model Rated {
+    id                Int      @id @default(autoincrement())
+    userId            Int
+    User              User     @relation(fields: [userId], references: [id])
+    rated             Int
     tmdbMovieId       Int
     tmdbTitle         String
     tmbdPoster_path   String
