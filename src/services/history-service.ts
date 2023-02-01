@@ -22,10 +22,17 @@ async function setLikeOnHistory(historyId: number, userId: number) {
   return;
 }
 
+async function deleteLike(likeId: number) {
+  await interactionRepository.removeLike(likeId);
+
+  return;
+}
+
 const historyService = {
   SearchAllHistory,
   searchHistoryInfo,
   setLikeOnHistory,
+  deleteLike,
 };
 
 export default historyService;

@@ -46,3 +46,18 @@ export async function postLikeHistory(
     return res.sendStatus(httpStatus.INTERNAL_SERVER_ERROR);
   }
 }
+
+export async function deleteLikeHistory(
+  req: AuthenticatedRequest,
+  res: Response
+) {
+  const { likeId } = req.query;
+
+  try {
+    await historyService.deleteLike(Number(likeId));
+
+    res.sendStatus(httpStatus.OK);
+  } catch (error) {
+    return res.sendStatus(httpStatus.INTERNAL_SERVER_ERROR);
+  }
+}
