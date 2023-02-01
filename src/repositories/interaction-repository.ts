@@ -6,9 +6,19 @@ async function findHistoryInfo(historyId: number) {
     where: {
       id: historyId,
     },
-    include: {
-      Comment: true,
+    select: {
       Like: true,
+      Comment: {
+        select: {
+          User: {
+            include: {
+              Profile: true,
+            },
+          },
+          comment: true,
+          createdAt: true,
+        },
+      },
     },
   });
 }
