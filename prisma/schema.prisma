@@ -90,10 +90,8 @@ model Rated {
     id                Int      @id @default(autoincrement())
     userId            Int
     User              User     @relation(fields: [userId], references: [id])
-    rated             Int
+    rate              Decimal
     tmdbMovieId       Int
-    tmdbTitle         String
-    tmbdPoster_path   String
     createdAt         DateTime @default(now())
     updatedAt         DateTime @updatedAt
 }
