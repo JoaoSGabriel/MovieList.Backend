@@ -4,22 +4,16 @@ import httpStatus from "http-status";
 import ratedService from "../services/rated-service";
 
 export async function postNewRate(req: AuthenticatedRequest, res: Response) {
-  const { tmdbMovieId, tmdbTitle, tmdbPoster_path, rated } = req.body;
+  const { tmdbMovieId, rate } = req.body;
 
-  if (!tmdbMovieId || !tmdbTitle || !tmdbPoster_path || !rated) {
+  if (!tmdbMovieId || !rate) {
     return res.sendStatus(httpStatus.BAD_REQUEST);
   }
 
   const { userId } = req;
 
   try {
-    await ratedService.newRate(
-      userId,
-      tmdbMovieId,
-      tmdbTitle,
-      tmdbPoster_path,
-      Number(rated)
-    );
+    await ratedService.newRate(userId, tmdbMovieId, rate);
 
     return res.sendStatus(httpStatus.OK);
   } catch (error) {

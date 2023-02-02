@@ -15,17 +15,6 @@ async function deleteRate(rateId: number) {
   });
 }
 
-async function editRate(newRate: number, rateId: number) {
-  return prisma.rated.update({
-    data: {
-      rated: newRate,
-    },
-    where: {
-      id: rateId,
-    },
-  });
-}
-
 async function findRate(userId: number, tmdbMovieId: number) {
   return prisma.rated.findFirst({
     where: {
@@ -38,7 +27,6 @@ async function findRate(userId: number, tmdbMovieId: number) {
 const ratedRepository = {
   newRate,
   deleteRate,
-  editRate,
   findRate,
 };
 

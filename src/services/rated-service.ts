@@ -1,24 +1,17 @@
 import ratedRepository from "../repositories/rated-repository";
 
-async function newRate(
-  userId: number,
-  tmdbMovieId: number,
-  tmdbTitle: string,
-  tmbdPoster_path: string,
-  rated: number
-) {
+async function newRate(userId: number, tmdbMovieId: number, rate: number) {
   const hasRate = await ratedRepository.findRate(userId, tmdbMovieId);
 
   if (hasRate) {
+    console.log(hasRate);
     return;
   }
 
   await ratedRepository.newRate({
     userId,
     tmdbMovieId,
-    tmdbTitle,
-    tmbdPoster_path,
-    rated,
+    rate,
   });
 
   return;
