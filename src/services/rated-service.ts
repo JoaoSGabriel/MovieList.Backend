@@ -7,6 +7,12 @@ async function newRate(
   tmbdPoster_path: string,
   rated: number
 ) {
+  const hasRate = await ratedRepository.findRate(userId, tmdbMovieId);
+
+  if (hasRate) {
+    return;
+  }
+
   await ratedRepository.newRate({
     userId,
     tmdbMovieId,
@@ -24,9 +30,16 @@ async function deleteRate(rateId: number) {
   return;
 }
 
+async function findRate(userId: number, tmdbMovieId: number) {
+  const hasRate = await ratedRepository.findRate(userId, tmdbMovieId);
+
+  return hasRate;
+}
+
 const ratedService = {
   newRate,
   deleteRate,
+  findRate,
 };
 
 export default ratedService;
