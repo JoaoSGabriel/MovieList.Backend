@@ -22,3 +22,7 @@ Algumas das tecnologias utilizadas para desenvolvimento deste projeto:
 3. Crie um banco de dados PostgreSQL com o nome que você preferir
 4. Configure o .env usando o .env.example de exemplo
 5. Inicie o projeto com o comando: <code>NPM run dev</code>
+
+## Rotas
+
+<h4>Em breve</h4>
